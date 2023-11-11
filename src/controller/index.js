@@ -22,8 +22,9 @@ class ChristmasController {
 
   async #receiveOrder() {
     const date = await this.#getDate();
+    const userRequestedMenus = await this.#getUserRequestedMenus();
 
-    return { date };
+    return { date, userRequestedMenus };
   }
 
   async #getDate() {
@@ -36,11 +37,25 @@ class ChristmasController {
     }
   }
 
+  async #getUserRequestedMenus() {
+    try {
+      const userRequestedMenus = await this.#inputView.readUserRequestedMenus();
+
+      return userRequestedMenus;
+    } catch ({ message }) {
+      return this.#onError(message, 'menus');
+    }
+  }
+
   async #onError(message, process) {
     this.#outputView.print(message);
 
     if (process === 'date') {
       await this.#getDate();
+    }
+
+    if (process === 'menus') {
+      await this.#getUserRequestedMenus();
     }
   }
 }
