@@ -1,4 +1,5 @@
 import Date from '../model/Date.js';
+import UserRequestedMenus from '../model/UserRequestedMenus.js';
 import ChristmasModel from '../model/index.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
@@ -41,7 +42,7 @@ class ChristmasController {
     try {
       const userRequestedMenus = await this.#inputView.readUserRequestedMenus();
 
-      return userRequestedMenus;
+      return UserRequestedMenus.of(userRequestedMenus);
     } catch ({ message }) {
       return this.#onError(message, 'menus');
     }
