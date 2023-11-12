@@ -84,6 +84,10 @@ class UserRequestedMenus {
   getTotalMenuPrice() {
     return this.#totalMenuPrice;
   }
+
+  isGiftMenuAvailable() {
+    return this.#totalMenuPrice >= 120000;
+  }
 }
 
 export default UserRequestedMenus;

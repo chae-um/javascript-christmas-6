@@ -65,6 +65,7 @@ class ChristmasController {
   #printBenefitsContent({ date, userRequestedMenus }) {
     this.#outputView.printOrderedMenu(userRequestedMenus.getUserRequestedMenus());
     this.#outputView.printOriginalOrderTotal(userRequestedMenus.getTotalMenuPrice());
+    this.#outputView.printGiftMenu(userRequestedMenus.isGiftMenuAvailable());
   }
 }
 
