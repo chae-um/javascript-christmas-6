@@ -80,6 +80,10 @@ class UserRequestedMenus {
   getUserRequestedMenus() {
     return this.#userRequestedMenus;
   }
+
+  getTotalMenuPrice() {
+    return this.#totalMenuPrice;
+  }
 }
 
 export default UserRequestedMenus;
