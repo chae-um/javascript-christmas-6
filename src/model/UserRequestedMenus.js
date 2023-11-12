@@ -74,7 +74,11 @@ class UserRequestedMenus {
 
   // eslint-disable-next-line class-methods-use-this
   #calculateTotalMenuPrice(userRequestedMenus) {
-    return userRequestedMenus.reduce((acc, cur) => acc + MENUS[cur.split('-')[0]], 0);
+    return userRequestedMenus.reduce((acc, cur) => {
+      const [menu, quantity] = cur.split('-');
+
+      return acc + MENUS[menu] * quantity;
+    }, 0);
   }
 
   getUserRequestedMenus() {
