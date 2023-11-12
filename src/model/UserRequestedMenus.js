@@ -5,9 +5,11 @@ import { isValidCount, isValidFormatter } from '../utils/validators/index.js';
 class UserRequestedMenus {
   #userRequestedMenus;
 
+  #totalMenuPrice;
+
   constructor(userRequestedMenus) {
     this.#validate(userRequestedMenus);
-    this.#userRequestedMenus = userRequestedMenus;
+    this.#organizeMenus(userRequestedMenus.split(','));
   }
 
   #validate(userRequestedMenus) {
@@ -52,6 +54,26 @@ class UserRequestedMenus {
 
   static of(userRequestedMenus) {
     return new UserRequestedMenus(userRequestedMenus);
+  }
+
+  #organizeMenus(userRequestedMenus) {
+    this.#userRequestedMenus = this.#cleanMenus(userRequestedMenus);
+    this.#totalMenuPrice = this.#calculateTotalMenuPrice(userRequestedMenus);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  #cleanMenus(userRequestedMenus) {
+    return userRequestedMenus.reduce((acc, userRequestedMenu) => {
+      const menu = userRequestedMenu.split('-')[0];
+      acc[menu] = (acc[menu] || 0) + 1;
+
+      return acc;
+    }, {});
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  #calculateTotalMenuPrice(userRequestedMenus) {
+    return userRequestedMenus.reduce((acc, cur) => acc + MENUS[cur.split('-')[0]], 0);
   }
 }
 
