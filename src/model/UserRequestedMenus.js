@@ -64,16 +64,21 @@ class UserRequestedMenus {
   // eslint-disable-next-line class-methods-use-this
   #cleanMenus(userRequestedMenus) {
     return userRequestedMenus.reduce((acc, userRequestedMenu) => {
-      const menu = userRequestedMenu.split('-')[0];
-      acc[menu] = (acc[menu] || 0) + 1;
+      const [menu, quantity] = userRequestedMenu.split('-');
+
+      acc.set(menu, quantity);
 
       return acc;
-    }, {});
+    }, new Map());
   }
 
   // eslint-disable-next-line class-methods-use-this
   #calculateTotalMenuPrice(userRequestedMenus) {
     return userRequestedMenus.reduce((acc, cur) => acc + MENUS[cur.split('-')[0]], 0);
+  }
+
+  getUserRequestedMenus() {
+    return this.#userRequestedMenus;
   }
 }
 

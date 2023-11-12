@@ -19,6 +19,8 @@ class ChristmasController {
 
   async run() {
     const order = await this.#receiveOrder();
+
+    this.#printBenefitsContent(order);
   }
 
   async #receiveOrder() {
@@ -58,6 +60,10 @@ class ChristmasController {
     if (process === 'menus') {
       await this.#getUserRequestedMenus();
     }
+  }
+
+  #printBenefitsContent({ date, userRequestedMenus }) {
+    this.#outputView.printOrderedMenu(userRequestedMenus.getUserRequestedMenus());
   }
 }
 
