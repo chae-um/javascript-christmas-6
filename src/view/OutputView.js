@@ -46,6 +46,11 @@ const OutputView = {
     this.print('\n<총혜택 금액>');
     this.print(`-${benefitsContent.toLocaleString('ko-KR')}원`);
   },
+
+  printDiscountedTotalMenuPrice(discountedTotalMenuPrice) {
+    this.print('\n<할인 후 예상 결제 금액>');
+    this.print(`${discountedTotalMenuPrice.toLocaleString('ko-KR')}원`);
+  },
 };
 
 export default OutputView;
