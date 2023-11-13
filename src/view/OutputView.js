@@ -41,6 +41,11 @@ const OutputView = {
     if (specialDiscount) this.print(`특별 할인: -${specialDiscount.toLocaleString('ko-KR')}원`);
     if (giftDiscount) this.print(`증정 이벤트: -${giftDiscount.toLocaleString('ko-KR')}원`);
   },
+
+  printBenefitsContent(benefitsContent) {
+    this.print('\n<총혜택 금액>');
+    this.print(`-${benefitsContent.toLocaleString('ko-KR')}원`);
+  },
 };
 
 export default OutputView;
