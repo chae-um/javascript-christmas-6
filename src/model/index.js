@@ -7,12 +7,13 @@ class ChristmasModel {
     this.#discount = new Discount(day, userRequestedMenus);
     if (!this.#discount.canDiscount()) return { canDiscount: false };
 
-    const weeklyDiscount = this.#discount.calculateWeeklyDiscount();
-    const specialDiscount = this.#discount.calculateSpecialDisCount();
-    const dDayDiscount = this.#discount.calculateChristmasDDayDiscount();
-    const giftDiscount = this.#discount.calculateGiftMenuDiscount();
+    const discountData = this.#discount.calculateDiscount();
 
-    return { canDiscount: true, weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount };
+    return { canDiscount: true, ...discountData };
+  }
+
+  getBenefitsAmount() {
+    return this.#discount.calculateTotalBenefitsAmount();
   }
 }
 

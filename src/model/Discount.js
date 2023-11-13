@@ -12,7 +12,23 @@ class Discount {
     return this.#userRequestedMenus.canDiscount();
   }
 
-  calculateWeeklyDiscount() {
+  calculateDiscount() {
+    const weeklyDiscount = this.#calculateWeeklyDiscount();
+    const specialDiscount = this.#calculateSpecialDisCount();
+    const dDayDiscount = this.#calculateChristmasDDayDiscount();
+    const giftDiscount = this.#calculateGiftMenuDiscount();
+
+    return { weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount };
+  }
+
+  calculateTotalBenefitsAmount() {
+    const { weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount } =
+      this.calculateDiscount();
+
+    return weeklyDiscount.amount + specialDiscount + dDayDiscount + giftDiscount;
+  }
+
+  #calculateWeeklyDiscount() {
     if (this.#day.isWeekdays()) {
       return { weekly: '평일 할인', amount: this.#userRequestedMenus.getDesertQuantity() * 2023 };
     }
@@ -20,7 +36,7 @@ class Discount {
     return { weekly: '주말 할인', amount: this.#userRequestedMenus.getMainQuantity() * 2023 };
   }
 
-  calculateSpecialDisCount() {
+  #calculateSpecialDisCount() {
     if (this.#day.isSpecialDiscount()) {
       return 1000;
     }
@@ -28,7 +44,7 @@ class Discount {
     return 0;
   }
 
-  calculateChristmasDDayDiscount() {
+  #calculateChristmasDDayDiscount() {
     if (this.#day.isChristmasDDayDiscount()) {
       return 1000 + (this.#day.getDate() - 1) * 100;
     }
@@ -36,7 +52,7 @@ class Discount {
     return 0;
   }
 
-  calculateGiftMenuDiscount() {
+  #calculateGiftMenuDiscount() {
     if (this.#userRequestedMenus.isGiftMenuAvailable()) {
       return 25000;
     }
