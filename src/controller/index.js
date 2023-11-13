@@ -67,6 +67,7 @@ class ChristmasController {
     this.#outputView.printDiscount(this.#model.calculateDiscount());
     this.#outputView.printBenefitsContent(this.#model.getBenefitsAmount());
     this.#outputView.printDiscountedTotalMenuPrice(this.#model.getDiscountedTotalMenuPrice());
+    this.#outputView.printEventBadge(this.#model.getEventBadge());
   }
 }
 

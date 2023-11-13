@@ -51,6 +51,11 @@ const OutputView = {
     this.print('\n<할인 후 예상 결제 금액>');
     this.print(`${discountedTotalMenuPrice.toLocaleString('ko-KR')}원`);
   },
+
+  printEventBadge(eventBadge) {
+    this.print('\n<12월 이벤트 배지>');
+    this.print(eventBadge);
+  },
 };
 
 export default OutputView;

@@ -22,6 +22,16 @@ class ChristmasModel {
   getDiscountedTotalMenuPrice() {
     return this.#discount.calculateDiscountedTotalMenuPrice();
   }
+
+  getEventBadge() {
+    const benefitsAmount = this.#discount.calculateTotalBenefitsAmount();
+
+    if (benefitsAmount >= 20000) return '산타';
+    if (benefitsAmount >= 10000) return '트리';
+    if (benefitsAmount >= 5000) return '별';
+
+    return '없음';
+  }
 }
 
 export default ChristmasModel;
