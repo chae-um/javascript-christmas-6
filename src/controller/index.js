@@ -1,4 +1,4 @@
-import Date from '../model/Date.js';
+import Day from '../model/Day.js';
 import UserRequestedMenus from '../model/UserRequestedMenus.js';
 import ChristmasModel from '../model/index.js';
 import InputView from '../view/InputView.js';
@@ -24,17 +24,17 @@ class ChristmasController {
   }
 
   async #receiveOrder() {
-    const date = await this.#getDate();
+    const day = await this.#getDate();
     const userRequestedMenus = await this.#getUserRequestedMenus();
 
-    return { date, userRequestedMenus };
+    return { day, userRequestedMenus };
   }
 
   async #getDate() {
     try {
-      const date = await this.#inputView.readDate();
+      const day = await this.#inputView.readDate();
 
-      return Date.of(Number(date));
+      return Day.of(Number(day));
     } catch ({ message }) {
       return this.#onError(message, 'date');
     }
@@ -46,26 +46,25 @@ class ChristmasController {
 
       return UserRequestedMenus.of(userRequestedMenus);
     } catch ({ message }) {
-      return this.#onError(message, 'menus');
+      return this.#onError(message);
     }
   }
 
-  async #onError(message, process) {
+  #onError(message, process) {
     this.#outputView.print(message);
 
     if (process === 'date') {
-      await this.#getDate();
+      return this.#getDate();
     }
 
-    if (process === 'menus') {
-      await this.#getUserRequestedMenus();
-    }
+    return this.#getUserRequestedMenus();
   }
 
-  #printBenefitsContent({ date, userRequestedMenus }) {
+  #printBenefitsContent({ day, userRequestedMenus }) {
     this.#outputView.printOrderedMenu(userRequestedMenus.getUserRequestedMenus());
     this.#outputView.printOriginalOrderTotal(userRequestedMenus.getTotalMenuPrice());
     this.#outputView.printGiftMenu(userRequestedMenus.isGiftMenuAvailable());
+    this.#model.calculateDiscount(day, userRequestedMenus);
   }
 }
 

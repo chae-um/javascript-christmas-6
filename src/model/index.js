@@ -1,10 +1,18 @@
-import Date from './Date.js';
+import Discount from './Discount.js';
 
 class ChristmasModel {
-  validateDate(input) {
-    const date = Date.of(input);
+  #discount;
 
-    return date;
+  calculateDiscount(day, userRequestedMenus) {
+    this.#discount = new Discount(day, userRequestedMenus);
+    if (!this.#discount.canDiscount()) return { canDiscount: false };
+
+    const weeklyDiscount = this.#discount.calculateWeeklyDiscount();
+    const specialDiscount = this.#discount.calculateSpecialDisCount();
+    const dDayDiscount = this.#discount.calculateChristmasDDayDiscount();
+    const giftDiscount = this.#discount.calculateGiftMenuDiscount();
+
+    return { canDiscount: true, weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount };
   }
 }
 

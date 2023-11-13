@@ -66,7 +66,7 @@ class UserRequestedMenus {
     return userRequestedMenus.reduce((acc, userRequestedMenu) => {
       const [menu, quantity] = userRequestedMenu.split('-');
 
-      acc.set(menu, quantity);
+      acc.set(menu, Number(quantity));
 
       return acc;
     }, new Map());
@@ -79,6 +79,36 @@ class UserRequestedMenus {
 
       return acc + MENUS[menu] * quantity;
     }, 0);
+  }
+
+  getDesertQuantity() {
+    let count = 0;
+    const desert = ['초코케이크', '아이스크림'];
+
+    this.#userRequestedMenus.forEach((quantity, menu) => {
+      if (desert.includes(menu)) {
+        count += quantity;
+      }
+    });
+
+    return count;
+  }
+
+  getMainQuantity() {
+    let count = 0;
+    const main = ['티본스테이크', '바비큐립', '해산물파스타', '크리스마스파스타'];
+
+    this.#userRequestedMenus.forEach((quantity, menu) => {
+      if (main.includes(menu)) {
+        count += quantity;
+      }
+    });
+
+    return count;
+  }
+
+  canDiscount() {
+    return this.#totalMenuPrice >= 10000;
   }
 
   getUserRequestedMenus() {

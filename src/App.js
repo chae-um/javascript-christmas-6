@@ -4,7 +4,7 @@ class App {
   async run() {
     const christmasController = new ChristmasController();
 
-    christmasController.run();
+    await christmasController.run();
   }
 }
 
