@@ -220,3 +220,56 @@ class Day {
 ```
 
 위의 validate는 규칙에의해 `this`를 사용하지 않기때문에 `static`을 적용하라고 `eslint`에러가 발생합니다. 하지만 `validate`메서드는 인스턴스의 속성을 검증하는 용로도 사용되고 있습니다. 즉 해당 인스턴스의 속성에 의존하고 있으므로, 인스턴스 메서드로 유지하는 것이 적절합니다. 정적 메서드는 일반적으로 클래스의 인스턴스를 생성하지 않고 클래스 자체에서 호출하거나, 클래스의 상태와 무관한 작업을 수행해야 할 때 정적 메서드를 만드는 것이 적합합니다. 따라서 이 규칙은 `eslint`의 도움보다 제가 스스로 판단해서 사용하기로 결정했습니다.
+
+## 5. 데이터를 꺼내지(get)말고 메시지를 던지도록 구조를 바꿔 데이터를 가지는 객체가 일하도록 한다
+
+이 부분은 저번 로또 부분에서 부터 연습했던 부분이고 이번 크리스마스 미션에서도 적용시켜보았습니다.
+
+데이터를 꺼내서 사용하지않고 최대한 메시지를 던지도록 구조를 바꿔 데이터를 가지는 객체가 일하도록 구현을 하였습니다.
+
+[포비도 이런 말을 하였습니다.](https://tecoble.techcourse.co.kr/post/2020-04-28-ask-instead-of-getter/)
+[영상 링크](https://www.youtube.com/watch?v=bIeqAlmNRrA)
+
+```text
+상태를 가지는 객체를 추가했다면 객체가 제대로 된 역할을 하도록 구현해야 한다.
+객체가 로직을 구현하도록 해야한다.
+상태 데이터를 꺼내 로직을 처리하도록 구현하지 말고 객체에 메시지를 보내 일을 하도록 리팩토링한다.
+```
+
+> 리팩터링 전
+> Day.js
+
+```js
+class Day {
+  #date;
+
+  /**
+   * @param {number} date
+   */
+  constructor(date) {
+    this.#validate(date);
+    this.#date = date;
+  }
+
+  ...
+
+  isChristmasDDayDiscount() {
+    return this.#date >= 1 && this.#date <= 25;
+  }
+
+  isWeekdays(month = 12, year = 2023) {
+    const days = ['일', '월', '화', '수', '목'];
+    const specificDate = new Date(year, month - 1, this.#date);
+    const dayIndex = specificDate.getDay();
+
+    return Boolean(days[dayIndex]);
+  }
+
+  isSpecialDiscount() {
+    const specialDay = [3, 10, 17, 24, 25, 31];
+
+    return specialDay.includes(this.#date);
+  }
+
+}
+```
