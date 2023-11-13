@@ -1,3 +1,4 @@
+import { BADGE } from '../constants/System.js';
 import Discount from './Discount.js';
 
 class ChristmasModel {
@@ -26,11 +27,11 @@ class ChristmasModel {
   getEventBadge() {
     const benefitsAmount = this.#discount.calculateTotalBenefitsAmount();
 
-    if (benefitsAmount >= 20000) return '산타';
-    if (benefitsAmount >= 10000) return '트리';
-    if (benefitsAmount >= 5000) return '별';
+    if (benefitsAmount >= BADGE.santa.minAmount) return BADGE.santa.text;
+    if (benefitsAmount >= BADGE.tree.minAmount) return BADGE.tree.text;
+    if (benefitsAmount >= BADGE.start.minAmount) return BADGE.start.text;
 
-    return '없음';
+    return BADGE.nothing;
   }
 }
 
