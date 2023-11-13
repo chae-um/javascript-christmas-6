@@ -50,7 +50,15 @@ class ChristmasController {
   }
 
   #printBenefitsContent({ day, userRequestedMenus }) {
+    this.#setData(day, userRequestedMenus);
+    this.#print(userRequestedMenus);
+  }
+
+  #setData(day, userRequestedMenus) {
     this.#model = new ChristmasModel(day, userRequestedMenus);
+  }
+
+  #print(userRequestedMenus) {
     this.#outputView.printOrderedMenu(userRequestedMenus.getUserRequestedMenus());
     this.#outputView.printOriginalOrderTotal(userRequestedMenus.getTotalMenuPrice());
     this.#outputView.printGiftMenu(userRequestedMenus.isGiftMenuAvailable());
