@@ -1,6 +1,5 @@
 import Day from '../model/Day.js';
 import UserRequestedMenus from '../model/UserRequestedMenus.js';
-import ChristmasModel from '../model/index.js';
 
 class ChristmasController {
   #model;
@@ -9,9 +8,10 @@ class ChristmasController {
 
   #outputView;
 
-  constructor(inputView, outputView) {
+  constructor(inputView, outputView, christmasModel) {
     this.#inputView = inputView;
     this.#outputView = outputView;
+    this.#model = christmasModel;
   }
 
   async run() {
@@ -55,7 +55,7 @@ class ChristmasController {
   }
 
   #setData(day, userRequestedMenus) {
-    this.#model = new ChristmasModel(day, userRequestedMenus);
+    this.#model = new this.#model(day, userRequestedMenus);
   }
 
   #print(userRequestedMenus) {
