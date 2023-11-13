@@ -6,7 +6,7 @@ const OutputView = {
   },
 
   printOrderedMenu(userRequestedMenus) {
-    this.print('\n<주문 메뉴>\n');
+    this.print('\n<주문 메뉴>');
     userRequestedMenus.forEach((quantity, menu) => {
       this.print(`${menu} ${quantity}개`);
     });
@@ -18,12 +18,28 @@ const OutputView = {
   },
 
   printGiftMenu(isGiftMenuAvailable) {
-    this.print('\n<증점 메뉴>');
+    this.print('\n<증정 메뉴>');
     if (isGiftMenuAvailable) {
       this.print('샴페인 1개');
     } else {
       this.print('없음');
     }
+  },
+
+  printDiscount({ canDiscount, weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount }) {
+    this.print('\n<혜택 내역>');
+    if (!canDiscount) {
+      this.print('없음');
+      return;
+    }
+    if (dDayDiscount) {
+      this.print(`크리스마스 디데이 할인: -${dDayDiscount.toLocaleString('ko-KR')}원`);
+    }
+    if (weeklyDiscount.amount) {
+      this.print(`${weeklyDiscount.weekly}: -${weeklyDiscount.amount.toLocaleString('ko-KR')}원`);
+    }
+    if (specialDiscount) this.print(`특별 할인: -${specialDiscount.toLocaleString('ko-KR')}원`);
+    if (giftDiscount) this.print(`증정 이벤트: -${giftDiscount.toLocaleString('ko-KR')}원`);
   },
 };
 
