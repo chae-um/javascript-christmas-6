@@ -3,8 +3,11 @@ import Discount from './Discount.js';
 class ChristmasModel {
   #discount;
 
-  calculateDiscount(day, userRequestedMenus) {
+  constructor(day, userRequestedMenus) {
     this.#discount = new Discount(day, userRequestedMenus);
+  }
+
+  calculateDiscount() {
     if (!this.#discount.canDiscount()) return { canDiscount: false };
 
     const discountData = this.#discount.calculateDiscount();
@@ -14,6 +17,10 @@ class ChristmasModel {
 
   getBenefitsAmount() {
     return this.#discount.calculateTotalBenefitsAmount();
+  }
+
+  getDiscountedTotalMenuPrice() {
+    return this.#discount.calculateDiscountedTotalMenuPrice();
   }
 }
 

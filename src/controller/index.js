@@ -12,7 +12,6 @@ class ChristmasController {
   #outputView;
 
   constructor() {
-    this.#model = new ChristmasModel();
     this.#inputView = InputView;
     this.#outputView = OutputView;
   }
@@ -61,11 +60,13 @@ class ChristmasController {
   }
 
   #printBenefitsContent({ day, userRequestedMenus }) {
+    this.#model = new ChristmasModel(day, userRequestedMenus);
     this.#outputView.printOrderedMenu(userRequestedMenus.getUserRequestedMenus());
     this.#outputView.printOriginalOrderTotal(userRequestedMenus.getTotalMenuPrice());
     this.#outputView.printGiftMenu(userRequestedMenus.isGiftMenuAvailable());
-    this.#outputView.printDiscount(this.#model.calculateDiscount(day, userRequestedMenus));
+    this.#outputView.printDiscount(this.#model.calculateDiscount());
     this.#outputView.printBenefitsContent(this.#model.getBenefitsAmount());
+    this.#model.getDiscountedTotalMenuPrice();
   }
 }
 

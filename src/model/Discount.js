@@ -28,6 +28,13 @@ class Discount {
     return weeklyDiscount.amount + specialDiscount + dDayDiscount + giftDiscount;
   }
 
+  calculateDiscountedTotalMenuPrice() {
+    const { weeklyDiscount, specialDiscount, dDayDiscount } = this.calculateDiscount();
+    const discountSum = weeklyDiscount.amount + specialDiscount + dDayDiscount;
+
+    return this.#userRequestedMenus.getTotalMenuPrice() - discountSum;
+  }
+
   #calculateWeeklyDiscount() {
     if (this.#day.isWeekdays()) {
       return { weekly: '평일 할인', amount: this.#userRequestedMenus.getDesertQuantity() * 2023 };
