@@ -1,3 +1,5 @@
+import { DISCOUNT } from '../constants/System.js';
+
 class Discount {
   #day;
 
@@ -37,34 +39,40 @@ class Discount {
 
   #calculateWeeklyDiscount() {
     if (this.#day.isWeekdays()) {
-      return { weekly: '평일 할인', amount: this.#userRequestedMenus.getDesertQuantity() * 2023 };
+      return {
+        weekly: DISCOUNT.weekly.weekday,
+        amount: this.#userRequestedMenus.getDesertQuantity() * DISCOUNT.weekly.amount,
+      };
     }
 
-    return { weekly: '주말 할인', amount: this.#userRequestedMenus.getMainQuantity() * 2023 };
+    return {
+      weekly: DISCOUNT.weekly.weekend,
+      amount: this.#userRequestedMenus.getMainQuantity() * DISCOUNT.weekly.amount,
+    };
   }
 
   #calculateSpecialDisCount() {
     if (this.#day.isSpecialDiscount()) {
-      return 1000;
+      return DISCOUNT.special;
     }
 
-    return 0;
+    return DISCOUNT.nothing;
   }
 
   #calculateChristmasDDayDiscount() {
     if (this.#day.isChristmasDDayDiscount()) {
-      return 1000 + (this.#day.getDate() - 1) * 100;
+      return DISCOUNT.dDay.default + (this.#day.getDate() - 1) * DISCOUNT.dDay.unitAmount;
     }
 
-    return 0;
+    return DISCOUNT.nothing;
   }
 
   #calculateGiftMenuDiscount() {
     if (this.#userRequestedMenus.isGiftMenuAvailable()) {
-      return 25000;
+      return DISCOUNT.giftMenu;
     }
 
-    return 0;
+    return DISCOUNT.nothing;
   }
 }
 
