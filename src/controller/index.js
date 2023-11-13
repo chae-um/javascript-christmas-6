@@ -23,40 +23,32 @@ class ChristmasController {
   }
 
   async #receiveOrder() {
-    const day = await this.#getDate();
-    const userRequestedMenus = await this.#getUserRequestedMenus();
+    const day = await this.#handleError(() => this.#getDate());
+    const userRequestedMenus = await this.#handleError(() => this.#getUserRequestedMenus());
 
     return { day, userRequestedMenus };
   }
 
-  async #getDate() {
+  async #handleError(callback) {
     try {
-      const day = await this.#inputView.readDate();
-
-      return Day.of(Number(day));
+      return await callback();
     } catch ({ message }) {
-      return this.#onError(message, 'date');
+      this.#outputView.print(message);
+
+      return this.#handleError(callback);
     }
+  }
+
+  async #getDate() {
+    const day = await this.#inputView.readDate();
+
+    return Day.of(Number(day));
   }
 
   async #getUserRequestedMenus() {
-    try {
-      const userRequestedMenus = await this.#inputView.readUserRequestedMenus();
+    const userRequestedMenus = await this.#inputView.readUserRequestedMenus();
 
-      return UserRequestedMenus.of(userRequestedMenus);
-    } catch ({ message }) {
-      return this.#onError(message);
-    }
-  }
-
-  #onError(message, process) {
-    this.#outputView.print(message);
-
-    if (process === 'date') {
-      return this.#getDate();
-    }
-
-    return this.#getUserRequestedMenus();
+    return UserRequestedMenus.of(userRequestedMenus);
   }
 
   #printBenefitsContent({ day, userRequestedMenus }) {
