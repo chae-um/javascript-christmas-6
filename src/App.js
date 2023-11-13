@@ -1,10 +1,10 @@
 import ChristmasController from './controller/index.js';
+import OutputView from './view/OutputView.js';
+import InputView from './view/InputView.js';
 
 class App {
   async run() {
-    const christmasController = new ChristmasController();
-
-    await christmasController.run();
+    await new ChristmasController(InputView, OutputView).run();
   }
 }
 
