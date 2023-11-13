@@ -227,7 +227,7 @@ class Day {
 
 데이터를 꺼내서 사용하지않고 최대한 메시지를 던지도록 구조를 바꿔 데이터를 가지는 객체가 일하도록 구현을 하였습니다.
 
-[포비도 이런 말을 하였습니다.](https://tecoble.techcourse.co.kr/post/2020-04-28-ask-instead-of-getter/)
+[포비도 이런 말을 하였습니다.](https://tecoble.techcourse.co.kr/post/2020-04-28-ask-instead-of-getter/)  
 [영상 링크](https://www.youtube.com/watch?v=bIeqAlmNRrA)
 
 ```text
@@ -273,3 +273,47 @@ class Day {
 
 }
 ```
+
+## 6. 리팩터링 할 때 개선해야할 점
+
+### (1) 에러처리 메서드로 따로 분류
+
+<img width="800" alt="image" src="https://github.com/Ryan-Dia/javascript-christmas-6-Ryan-Dia/assets/76567238/111a230e-ad49-484b-b5d1-cb813178f0c6">
+
+> 이전 미션 코드
+
+```js
+  #onError(message, process, arg) {
+    LottoController.#printError(message);
+
+    if (process === LOTTO_PROCESS.bonus) {
+      return this.#getBonusNumber(arg);
+    }
+
+    if (process === LOTTO_PROCESS.winning) {
+      return this.#getWinningNumbers();
+    }
+
+    return this.#purchaseLotto();
+  }
+```
+
+저번 레이싱미션 때 이와 같은 피드백을 받았고 다른 분들 코드를 보면서 제가 했던 방식보다. 훨씬 더 가독성이 좋고 미래에 확장된다면 더 관리하기 수월하여 이번 미션에서 에러 핸들링 로직을 저번 미션과 다르게 구현할 생각 입니다.
+
+### (2) JSDoc을 더 잘 활용
+
+<img width="708" alt="image" src="https://github.com/Ryan-Dia/javascript-christmas-6-Ryan-Dia/assets/76567238/3f7ddb8e-8010-4743-ba48-0b87be295b8a">
+
+> 저번 미션 코드
+
+```js
+
+const InputView = {
+  /**
+   * @async
+   * @returns {string}
+...
+}
+```
+
+저번 레이싱 미션에서 `async`를 통한 반환을 `Promise<string>`이 아닌 `string`으로 해서 부정확한 정보를 제공했기에 이번에는 제대로 작성해보고자 합니다. 또한 객체를 return할 때 JSDoc을 통해서 정보를 더 자세하게 줄 예정입니다. 실제로 코드 리뷰하면서
