@@ -1,11 +1,10 @@
-import { BADGE } from '../constants/System.js';
 import Discount from './Discount.js';
 
 class ChristmasModel {
   #discount;
 
-  constructor(date, userRequestedMenus) {
-    this.#discount = new Discount(date, userRequestedMenus);
+  constructor(visitDate, userRequestedMenus) {
+    this.#discount = new Discount(visitDate, userRequestedMenus);
   }
 
   calculateDiscount() {
@@ -25,13 +24,7 @@ class ChristmasModel {
   }
 
   getEventBadge() {
-    const benefitsAmount = this.#discount.calculateTotalBenefitsAmount();
-
-    if (benefitsAmount >= BADGE.santa.minAmount) return BADGE.santa.text;
-    if (benefitsAmount >= BADGE.tree.minAmount) return BADGE.tree.text;
-    if (benefitsAmount >= BADGE.start.minAmount) return BADGE.start.text;
-
-    return BADGE.nothing;
+    return this.#discount.calculateEventBadge();
   }
 }
 

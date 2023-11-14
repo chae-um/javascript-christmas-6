@@ -1,4 +1,4 @@
-import { DISCOUNT } from '../constants/System.js';
+import { BADGE, DISCOUNT } from '../constants/System.js';
 
 class Discount {
   #visitDate;
@@ -35,6 +35,16 @@ class Discount {
     const discountSum = weeklyDiscount.amount + specialDiscount + dDayDiscount;
 
     return this.#userRequestedMenus.getTotalMenuPrice() - discountSum;
+  }
+
+  calculateEventBadge() {
+    const benefitsAmount = this.calculateTotalBenefitsAmount();
+
+    if (benefitsAmount >= BADGE.santa.minAmount) return BADGE.santa.text;
+    if (benefitsAmount >= BADGE.tree.minAmount) return BADGE.tree.text;
+    if (benefitsAmount >= BADGE.start.minAmount) return BADGE.start.text;
+
+    return BADGE.nothing;
   }
 
   #calculateWeeklyDiscount() {
