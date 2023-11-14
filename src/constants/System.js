@@ -6,7 +6,7 @@ export const BADGE = deepFreeze({
     minAmount: 20000,
   },
   tree: {
-    text: 'tree',
+    text: '트리',
     minAmount: 10000,
   },
   start: {
