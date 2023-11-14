@@ -325,3 +325,28 @@ const InputView = {
 ### (4) 테스트 코드 더 신경스기
 
 테스트 코드에 더 신경써서 도메인 로직을 전부 검증할 수 있도록 만들기
+
+## 7. export default를 export로 전환할 때 팁
+
+내보내기를 export default에서 export로 전환하면 해당 모듈을 import하는 파일에서는 중괄호를 추가해줘야합니다.
+
+> 예시
+
+```js
+// 모듈 파일 (예: example.js)
+export const myFunction = () => {
+  // 함수 내용
+};
+
+export const myVariable = 42;
+```
+
+```js
+// 다른 파일에서의 import 문
+import { myFunction, myVariable } from './example.js';
+
+// 이제 myFunction과 myVariable을 사용할 수 있습니다.
+```
+
+이렇게 그냥 해당 파일에서 그냥 교체하면 파일일 하나하나 찾아다니면서 중괄호를 추가해줘야합니다.  
+따라서 이럴때는 변경하고자 하는 코드로 이동해서 cmd + . 을 누르면 `covert named export to default export`라는 버튼이 생기고 그걸 누르면 export 에서 export default로 바꿔주고 모든 해당 모듈을 import하는 모든 파일에서 중괄호를 추가해줍니다. (반대일 때는 반대로 동작)
