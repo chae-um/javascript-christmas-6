@@ -1,4 +1,4 @@
-import handleValidationError from '../utils/error/index.js';
+import { handleValidationError } from '../utils/error/index.js';
 import { isInteger, isNan, isNumberValidScope } from '../utils/validators/index.js';
 
 class Day {

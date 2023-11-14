@@ -1,5 +1,5 @@
 import { BEVERAGE_MENUS, MENUS } from '../constants/Symbol.js';
-import handleValidationError from '../utils/error/index.js';
+import { handleValidationError } from '../utils/error/index.js';
 import { isValidCount, isValidFormatter } from '../utils/validators/index.js';
 
 class UserRequestedMenus {
@@ -8,14 +8,14 @@ class UserRequestedMenus {
   #totalMenuPrice;
 
   constructor(userRequestedMenus) {
-    this.#validate(userRequestedMenus);
+    this.#validate(userRequestedMenus.split(','));
     this.#organizeMenus(userRequestedMenus.split(','));
   }
 
   #validate(userRequestedMenus) {
     let menuCount = 0;
     const userMenus = [];
-    userRequestedMenus.split(',').forEach((userRequestedMenu) => {
+    userRequestedMenus.forEach((userRequestedMenu) => {
       if (!isValidFormatter(userRequestedMenu)) {
         handleValidationError('유효하지 않은 주문입니다. 다시 입력해 주세요.');
       }

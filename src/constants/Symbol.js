@@ -1,5 +1,7 @@
 export const SYMBOL = {
   emptyString: '',
+  comma: ',',
+  hyphen: '-',
 };
 
 export const MENUS = {
