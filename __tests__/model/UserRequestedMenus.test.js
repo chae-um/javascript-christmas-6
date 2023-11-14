@@ -89,8 +89,34 @@ describe('UserRequestedMenus', () => {
       { input: '초코케이크-3,아이스크림-4', expected: 7 },
       { input: '초코케이크-1,티본스테이크-3,아이스크림-2', expected: 3 },
     ])('주문한 디저트 개수의 총합을 리턴해야합니다.', ({ input, expected }) => {
-      expect(new UserRequestedMenus(input).getDesertQuantity()).toBe(expected);
+      expect(UserRequestedMenus.of(input).getDesertQuantity()).toBe(expected);
     });
+  });
+
+  describe('getMainQuantity', () => {
+    test.each([
+      {
+        input: '티본스테이크-3,해산물파스타-2,크리스마스파스타-4,초코케이크-3,제로콜라-2',
+        expected: 9,
+      },
+      {
+        input: '바비큐립-5,해산물파스타-2,타파스-3,양송이수프-2',
+        expected: 7,
+      },
+      {
+        input: '크리스마스파스타-2,시저샐러드-1,레드와인-3',
+        expected: 2,
+      },
+      {
+        input: '타파스-3,초코케이크-2,양송이수프-2',
+        expected: 0,
+      },
+    ])(
+      '고객이 주문한 메뉴들중에 메인 메뉴의 개수만 계산해서 리턴 해야한다. ',
+      ({ input, expected }) => {
+        expect(UserRequestedMenus.of(input).getMainQuantity()).toBe(expected);
+      },
+    );
   });
 
   describe('canDiscount', () => {
@@ -100,7 +126,7 @@ describe('UserRequestedMenus', () => {
     ])(
       '총주문 금액이 10,000원 이상이면 true를 이하이면 false를 리턴해야합니다',
       ({ input, expected }) => {
-        expect(new UserRequestedMenus(input).canDiscount()).toBe(expected);
+        expect(UserRequestedMenus.of(input).canDiscount()).toBe(expected);
       },
     );
   });
@@ -112,7 +138,7 @@ describe('UserRequestedMenus', () => {
     ])(
       '총주문 금액이 12만원이 넘으면 true 넘지 못하면 false를 리턴해야합니다',
       ({ input, expected }) => {
-        expect(new UserRequestedMenus(input).isGiftMenuAvailable()).toBe(expected);
+        expect(UserRequestedMenus.of(input).isGiftMenuAvailable()).toBe(expected);
       },
     );
   });
