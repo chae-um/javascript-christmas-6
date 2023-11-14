@@ -1,5 +1,6 @@
-import { BEVERAGE_MENUS, MENUS } from '../constants/Symbol.js';
+import { BEVERAGE_MENUS, MENUS, SYMBOL } from '../constants/Symbol.js';
 import { handleValidationError } from '../utils/error/index.js';
+import split from '../utils/split.js';
 import { isValidCount, isValidFormatter } from '../utils/validators/index.js';
 
 class UserRequestedMenus {
@@ -8,8 +9,8 @@ class UserRequestedMenus {
   #totalMenuPrice;
 
   constructor(userRequestedMenus) {
-    this.#validate(userRequestedMenus.split(','));
-    this.#organizeMenus(userRequestedMenus.split(','));
+    this.#validate(split(userRequestedMenus, SYMBOL.comma));
+    this.#organizeMenus(split(userRequestedMenus, SYMBOL.comma));
   }
 
   #validate(userRequestedMenus) {
@@ -19,7 +20,7 @@ class UserRequestedMenus {
       if (!isValidFormatter(userRequestedMenu)) {
         handleValidationError('유효하지 않은 주문입니다. 다시 입력해 주세요.');
       }
-      const [menu, quantity] = userRequestedMenu.split('-');
+      const [menu, quantity] = split(userRequestedMenu, SYMBOL.hyphen);
 
       this.#validateMenu(menu, quantity);
       menuCount += Number(quantity);
@@ -64,7 +65,7 @@ class UserRequestedMenus {
   // eslint-disable-next-line class-methods-use-this
   #cleanMenus(userRequestedMenus) {
     return userRequestedMenus.reduce((acc, userRequestedMenu) => {
-      const [menu, quantity] = userRequestedMenu.split('-');
+      const [menu, quantity] = split(userRequestedMenu, SYMBOL.hyphen);
 
       acc.set(menu, Number(quantity));
 
@@ -75,7 +76,7 @@ class UserRequestedMenus {
   // eslint-disable-next-line class-methods-use-this
   #calculateTotalMenuPrice(userRequestedMenus) {
     return userRequestedMenus.reduce((acc, cur) => {
-      const [menu, quantity] = cur.split('-');
+      const [menu, quantity] = split(cur, SYMBOL.hyphen);
 
       return acc + MENUS[menu] * quantity;
     }, 0);
