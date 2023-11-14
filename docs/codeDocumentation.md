@@ -68,3 +68,22 @@ export default function deepFreeze(object) {
   return Object.freeze(object);
 }
 ```
+
+### (2). split [UH-2]
+
+굳이 추상화 하지 않아도 될 split 메서드를 유틸함수로 추상화해서 사용했습니다.
+
+1. 이미 여러 패키지에서도 많이 활용하고 있습니다. ex) [react](https://github.com/facebook/react/blob/main/packages/shared/isArray.js)
+
+2. [compose method 패턴 적용](https://youtu.be/cVxqrGHxutU?t=1550)
+
+3. 사이드 이펙트 방지
+   - [MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split)에 나와있는 `split` 설명을 보시면 "구분자로 빈문자열("")을 제공하면, 사용자가 인식하는 문자 하나 또는 유니코드 문자(코드포인트) 하나씩으로 나누는 것이 아니라, UTF-16 코드유닛으로 나누게 되며 [써로게이트 페어](https://unicode.org/faq/utf_bom.html#utf16-2)가 망가질 수 있습니다. [참고](https://stackoverflow.com/questions/4547609/how-can-i-get-a-character-array-from-a-string/34717402#34717402)
+
+> 예시
+
+```js
+// 우리가 기대한  ["I", "💖", "U"] 이러한 배열이 아닙니다.
+
+'I💖U'.split(''); // ["I", "�", "�", "u"]
+```
