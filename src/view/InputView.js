@@ -1,11 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyString } from '../utils/validators/index.js';
+import { INPUT_MESSAGE, INPUT_MESSAGE_FUNCTION } from '../constants/Messages.js';
+import { EVENT_DATE } from '../constants/System.js';
 
 const InputView = {
   async readDate() {
-    const date = await Console.readLineAsync(
-      '12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)',
-    );
+    const date = await Console.readLineAsync(INPUT_MESSAGE_FUNCTION.date(EVENT_DATE.month));
 
     validateEmptyString(date);
 
@@ -13,9 +13,7 @@ const InputView = {
   },
 
   async readUserRequestedMenus() {
-    const userRequestedMenus = await Console.readLineAsync(
-      '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n',
-    );
+    const userRequestedMenus = await Console.readLineAsync(INPUT_MESSAGE.menu);
 
     validateEmptyString(userRequestedMenus);
 

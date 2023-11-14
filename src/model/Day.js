@@ -15,16 +15,15 @@ class Day {
     this.#date = date;
   }
 
-  // eslint-disable-next-line
   #validate(date) {
     if (isNan(date)) {
-      return handleValidationError(ERROR_MESSAGE.invalidDate);
+      handleValidationError(ERROR_MESSAGE.invalidDate);
     }
     if (!isInteger(date)) {
-      return handleValidationError(ERROR_MESSAGE.invalidDate);
+      handleValidationError(ERROR_MESSAGE.invalidDate);
     }
     if (!isNumberValidScope(date)) {
-      return handleValidationError(ERROR_MESSAGE.invalidDate);
+      handleValidationError(ERROR_MESSAGE.invalidDate);
     }
   }
 
