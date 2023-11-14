@@ -1,5 +1,4 @@
 import ValidationError from './ValidationError.js';
-import TypeError from './typeError.js';
 
 /**
  * @param {string} message
