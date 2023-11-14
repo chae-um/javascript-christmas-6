@@ -1,3 +1,4 @@
+import CustomTypeError from './CustomTypeError.js';
 import ValidationError from './ValidationError.js';
 
 /**
@@ -10,8 +11,8 @@ export function handleValidationError(message) {
 
 /**
  * @param {string} message
- * @throws {ValidationError}
+ * @throws {CustomTypeError}
  */
 export function handleTypeError(message) {
-  throw new TypeError(message);
+  throw new CustomTypeError(message);
 }
