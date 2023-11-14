@@ -38,12 +38,16 @@ class ChristmasController {
   }
 
   async #getDate() {
+    this.#printStart();
+
     const date = await this.#inputView.readDate();
 
     return VisitDate.of(Number(date));
   }
 
   async #getUserRequestedMenus() {
+    this.#printCautions();
+
     const userRequestedMenus = await this.#inputView.readUserRequestedMenus();
 
     return UserRequestedMenus.of(userRequestedMenus);
@@ -66,6 +70,14 @@ class ChristmasController {
     this.#outputView.printBenefitsContent(this.#model.getBenefitsAmount());
     this.#outputView.printDiscountedTotalMenuPrice(this.#model.getDiscountedTotalMenuPrice());
     this.#outputView.printEventBadge(this.#model.getEventBadge());
+  }
+
+  #printStart() {
+    this.#outputView.printStart();
+  }
+
+  #printCautions() {
+    this.#outputView.printCautions();
   }
 }
 

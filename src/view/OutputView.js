@@ -8,6 +8,17 @@ const OutputView = {
     return Console.print(message);
   },
 
+  printStart() {
+    this.print(OUTPUT_MESSAGE.start);
+  },
+
+  printCautions() {
+    this.print(OUTPUT_MESSAGE.cautions.title);
+    this.print(OUTPUT_MESSAGE.cautions.totalOrderAmount);
+    this.print(OUTPUT_MESSAGE.cautions.beverage);
+    this.print(OUTPUT_MESSAGE.cautions.menu);
+  },
+
   printOrderedMenu(userRequestedMenus) {
     this.print(OUTPUT_MESSAGE.title.userRequestedMenus);
     userRequestedMenus.forEach((quantity, menu) => {

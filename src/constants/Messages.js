@@ -1,5 +1,5 @@
 import { SYMBOL } from './Symbol.js';
-import { EVENT_DATE } from './System.js';
+import { DISCOUNT_LIMIT, EVENT_DATE, ORDER_LIMIT } from './System.js';
 
 export const ERROR_MESSAGE = {
   emptyString: '값을 입력해주세요',
@@ -29,6 +29,15 @@ export const OUTPUT_MESSAGE = {
   },
   nothing: '없음',
   giftMenu: '샴페인 1개',
+  cautions: {
+    title: `${SYMBOL.escapeSequence}[이벤트 주의 사항]`,
+    totalOrderAmount: `총주문 금액 ${DISCOUNT_LIMIT.totalMenuPrice.toLocaleString(
+      'ko-KR',
+    )}원 이상부터 이벤트가 적용됩니다.`,
+    beverage: '음료만 주문 시, 주문할 수 없습니다.',
+    menu: `메뉴는 한 번에 최대 ${ORDER_LIMIT.maxMenuCount}개까지만 주문할 수 있습니다.${SYMBOL.escapeSequence}`,
+  },
+  start: `안녕하세요! 우테코 식당 ${EVENT_DATE.month}월 이벤트 플래너입니다.`,
 };
 
 export const OUTPUT_MESSAGE_FUNCTION = {
