@@ -1,5 +1,6 @@
 import { ERROR_MESSAGE } from '../constants/Messages.js';
 import { BEVERAGE_MENUS, MENUS, SYMBOL } from '../constants/Symbol.js';
+import { DISCOUNT_LIMIT, MENU_BY_CATEGORY, ORDER_LIMIT } from '../constants/System.js';
 
 import { handleValidationError } from '../utils/error/index.js';
 import split from '../utils/split.js';
@@ -53,8 +54,10 @@ class UserRequestedMenus {
   }
 
   #validateMenus(menuCount, userMenus) {
-    if (menuCount > 20) {
-      handleValidationError('메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.');
+    if (menuCount > ORDER_LIMIT.maxMenuCount) {
+      handleValidationError(
+        `메뉴는 한 번에 최대 ${ORDER_LIMIT.maxMenuCount}개까지만 주문할 수 있습니다.`,
+      );
     }
     if (userMenus.length !== new Set(userMenus).size) {
       handleValidationError(ERROR_MESSAGE.invalidOrder);
@@ -69,7 +72,6 @@ class UserRequestedMenus {
     this.#totalMenuPrice = this.#calculateTotalMenuPrice(userRequestedMenus);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   #cleanMenus(userRequestedMenus) {
     return userRequestedMenus.reduce((acc, userRequestedMenu) => {
       const [menu, quantity] = split(userRequestedMenu, SYMBOL.hyphen);
@@ -94,7 +96,7 @@ class UserRequestedMenus {
 
   getDesertQuantity() {
     let count = 0;
-    const desert = ['초코케이크', '아이스크림'];
+    const { desert } = MENU_BY_CATEGORY;
 
     this.#userRequestedMenus.forEach((quantity, menu) => {
       if (desert.includes(menu)) {
@@ -107,7 +109,7 @@ class UserRequestedMenus {
 
   getMainQuantity() {
     let count = 0;
-    const main = ['티본스테이크', '바비큐립', '해산물파스타', '크리스마스파스타'];
+    const { main } = MENU_BY_CATEGORY;
 
     this.#userRequestedMenus.forEach((quantity, menu) => {
       if (main.includes(menu)) {
@@ -119,7 +121,7 @@ class UserRequestedMenus {
   }
 
   canDiscount() {
-    return this.#totalMenuPrice >= 10000;
+    return this.#totalMenuPrice >= DISCOUNT_LIMIT.totalMenuPrice;
   }
 
   getUserRequestedMenus() {
@@ -131,7 +133,7 @@ class UserRequestedMenus {
   }
 
   isGiftMenuAvailable() {
-    return this.#totalMenuPrice >= 120000;
+    return this.#totalMenuPrice >= DISCOUNT_LIMIT.giftMenu;
   }
 }
 

@@ -45,3 +45,28 @@ export const DISCOUNT = deepFreeze({
   giftMenu: 25000,
   nothing: 0,
 });
+
+/**
+ * @typedef {object} MenuByCategory
+ * @property {string[]} desert - 디저트 항목의 메뉴 배열
+ * @property {string[]} main - 주 메뉴 항목의 메뉴 배열
+ */
+
+/**
+ * 카테고리별 메뉴를 저장하는 객체입니다.
+ * @type {MenuByCategory}
+ * @constant
+ */
+export const MENU_BY_CATEGORY = deepFreeze({
+  desert: ['초코케이크', '아이스크림'],
+  main: ['티본스테이크', '바비큐립', '해산물파스타', '크리스마스파스타'],
+});
+
+export const DISCOUNT_LIMIT = Object.freeze({
+  totalMenuPrice: 10_000,
+  giftMenu: 120_000,
+});
+
+export const ORDER_LIMIT = Object.freeze({
+  maxMenuCount: 20,
+});
