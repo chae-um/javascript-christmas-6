@@ -1,5 +1,5 @@
-import Day from '../model/Day.js';
 import UserRequestedMenus from '../model/UserRequestedMenus.js';
+import VisitDate from '../model/VisitDate.js';
 
 class ChristmasController {
   #model;
@@ -21,10 +21,10 @@ class ChristmasController {
   }
 
   async #receiveOrder() {
-    const day = await this.#handleError(() => this.#getDate());
+    const visitDate = await this.#handleError(() => this.#getDate());
     const userRequestedMenus = await this.#handleError(() => this.#getUserRequestedMenus());
 
-    return { day, userRequestedMenus };
+    return { visitDate, userRequestedMenus };
   }
 
   async #handleError(callback) {
@@ -38,9 +38,9 @@ class ChristmasController {
   }
 
   async #getDate() {
-    const day = await this.#inputView.readDate();
+    const date = await this.#inputView.readDate();
 
-    return Day.of(Number(day));
+    return VisitDate.of(Number(date));
   }
 
   async #getUserRequestedMenus() {
@@ -49,13 +49,13 @@ class ChristmasController {
     return UserRequestedMenus.of(userRequestedMenus);
   }
 
-  #printBenefitsContent({ day, userRequestedMenus }) {
-    this.#setData(day, userRequestedMenus);
+  #printBenefitsContent({ visitDate, userRequestedMenus }) {
+    this.#setData(visitDate, userRequestedMenus);
     this.#print(userRequestedMenus);
   }
 
-  #setData(day, userRequestedMenus) {
-    this.#model = new this.#model(day, userRequestedMenus);
+  #setData(visitDate, userRequestedMenus) {
+    this.#model = new this.#model(visitDate, userRequestedMenus);
   }
 
   #print(userRequestedMenus) {

@@ -4,8 +4,8 @@ import Discount from './Discount.js';
 class ChristmasModel {
   #discount;
 
-  constructor(day, userRequestedMenus) {
-    this.#discount = new Discount(day, userRequestedMenus);
+  constructor(date, userRequestedMenus) {
+    this.#discount = new Discount(date, userRequestedMenus);
   }
 
   calculateDiscount() {

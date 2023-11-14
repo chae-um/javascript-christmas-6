@@ -4,7 +4,7 @@ import { EVENT_DATE } from '../constants/System.js';
 import { handleValidationError } from '../utils/error/index.js';
 import { isInteger, isNan, isNumberValidScope } from '../utils/validators/index.js';
 
-class Day {
+class VisitDate {
   #date;
 
   /**
@@ -28,7 +28,7 @@ class Day {
   }
 
   static of(date) {
-    return new Day(date);
+    return new VisitDate(date);
   }
 
   isChristmasDDayDiscount() {
@@ -54,4 +54,4 @@ class Day {
   }
 }
 
-export default Day;
+export default VisitDate;

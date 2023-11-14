@@ -1,12 +1,12 @@
 import { DISCOUNT } from '../constants/System.js';
 
 class Discount {
-  #day;
+  #visitDate;
 
   #userRequestedMenus;
 
-  constructor(day, userRequestedMenus) {
-    this.#day = day;
+  constructor(visitDate, userRequestedMenus) {
+    this.#visitDate = visitDate;
     this.#userRequestedMenus = userRequestedMenus;
   }
 
@@ -38,7 +38,7 @@ class Discount {
   }
 
   #calculateWeeklyDiscount() {
-    if (this.#day.isWeekdays()) {
+    if (this.#visitDate.isWeekdays()) {
       return {
         weekly: DISCOUNT.weekly.weekday,
         amount: this.#userRequestedMenus.getDesertQuantity() * DISCOUNT.weekly.amount,
@@ -52,7 +52,7 @@ class Discount {
   }
 
   #calculateSpecialDisCount() {
-    if (this.#day.isSpecialDiscount()) {
+    if (this.#visitDate.isSpecialDiscount()) {
       return DISCOUNT.special;
     }
 
@@ -60,8 +60,8 @@ class Discount {
   }
 
   #calculateChristmasDDayDiscount() {
-    if (this.#day.isChristmasDDayDiscount()) {
-      return DISCOUNT.dDay.default + (this.#day.getDate() - 1) * DISCOUNT.dDay.unitAmount;
+    if (this.#visitDate.isChristmasDDayDiscount()) {
+      return DISCOUNT.dDay.default + (this.#visitDate.getDate() - 1) * DISCOUNT.dDay.unitAmount;
     }
 
     return DISCOUNT.nothing;
