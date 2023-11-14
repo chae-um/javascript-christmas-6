@@ -1,59 +1,74 @@
 import { Console } from '@woowacourse/mission-utils';
 
+import { OUTPUT_MESSAGE, OUTPUT_MESSAGE_FUNCTION } from '../constants/Messages.js';
+import { DISCOUNT } from '../constants/System.js';
+
 const OutputView = {
   print(message) {
     return Console.print(message);
   },
 
   printOrderedMenu(userRequestedMenus) {
-    this.print('\n<주문 메뉴>');
+    this.print(OUTPUT_MESSAGE.title.userRequestedMenus);
     userRequestedMenus.forEach((quantity, menu) => {
-      this.print(`${menu} ${quantity}개`);
+      this.print(OUTPUT_MESSAGE_FUNCTION.orderedMenu(menu, quantity));
     });
   },
 
   printOriginalOrderTotal(totalMenuPrice) {
-    this.print('\n<할인 전 총주문 금액>');
-    this.print(`${totalMenuPrice.toLocaleString('ko-KR')}원`);
+    this.print(OUTPUT_MESSAGE.title.totalMenuPrice);
+    this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(totalMenuPrice, false, false));
   },
 
   printGiftMenu(isGiftMenuAvailable) {
-    this.print('\n<증정 메뉴>');
+    this.print(OUTPUT_MESSAGE.title.giftMenu);
+
     if (isGiftMenuAvailable) {
-      this.print('샴페인 1개');
+      this.print(OUTPUT_MESSAGE.giftMenu);
     } else {
-      this.print('없음');
+      this.print(OUTPUT_MESSAGE.nothing);
     }
   },
 
-  printDiscount({ canDiscount, weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount }) {
-    this.print('\n<혜택 내역>');
-    if (!canDiscount) {
-      this.print('없음');
+  printDiscount(discountData) {
+    this.print(OUTPUT_MESSAGE.title.discount);
+
+    if (!discountData.canDiscount) {
+      this.print(OUTPUT_MESSAGE.nothing);
       return;
     }
+
+    this.printDiscountData(discountData);
+  },
+
+  printDiscountData({ dDayDiscount, weeklyDiscount, specialDiscount, giftDiscount }) {
     if (dDayDiscount) {
-      this.print(`크리스마스 디데이 할인: -${dDayDiscount.toLocaleString('ko-KR')}원`);
+      this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(dDayDiscount, DISCOUNT.title.dDay));
     }
     if (weeklyDiscount.amount) {
-      this.print(`${weeklyDiscount.weekly}: -${weeklyDiscount.amount.toLocaleString('ko-KR')}원`);
+      const { weekly, amount } = weeklyDiscount;
+      this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(amount, weekly));
     }
-    if (specialDiscount) this.print(`특별 할인: -${specialDiscount.toLocaleString('ko-KR')}원`);
-    if (giftDiscount) this.print(`증정 이벤트: -${giftDiscount.toLocaleString('ko-KR')}원`);
+    if (specialDiscount) {
+      this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(specialDiscount, DISCOUNT.title.special));
+    }
+    if (giftDiscount) {
+      this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(giftDiscount, DISCOUNT.title.gift));
+    }
   },
 
   printBenefitsContent(benefitsContent) {
-    this.print('\n<총혜택 금액>');
-    this.print(`-${benefitsContent.toLocaleString('ko-KR')}원`);
+    this.print(OUTPUT_MESSAGE.title.benefitsContent);
+    this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(benefitsContent));
   },
 
   printDiscountedTotalMenuPrice(discountedTotalMenuPrice) {
-    this.print('\n<할인 후 예상 결제 금액>');
-    this.print(`${discountedTotalMenuPrice.toLocaleString('ko-KR')}원`);
+    this.print(OUTPUT_MESSAGE.title.discountedTotalMenuPrice);
+    this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(discountedTotalMenuPrice, false, false));
   },
 
   printEventBadge(eventBadge) {
-    this.print('\n<12월 이벤트 배지>');
+    this.print(OUTPUT_MESSAGE.title.eventBadge);
     this.print(eventBadge);
   },
 };

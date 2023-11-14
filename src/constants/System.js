@@ -28,6 +28,9 @@ export const BADGE = deepFreeze({
  * @property {number} dDay.unitAmount - D-Day 단위 할인 금액
  * @property {number} giftMenu - 증정 메뉴 가격
  * @property {number} nothing - 할인 없음을 나타내는 값
+ * @property {object} title - 할인 제목
+ * @property {string} title.dDay - 크리스마스 디데이 할인
+ * @property {string} title.gift - 증정 이벤트
  */
 
 /** @type {DISCOUNT} */
@@ -44,6 +47,11 @@ export const DISCOUNT = deepFreeze({
   },
   giftMenu: 25000,
   nothing: 0,
+  title: {
+    dDay: '크리스마스 디데이 할인',
+    special: '특별 할인',
+    gift: '증정 이벤트',
+  },
 });
 
 /**

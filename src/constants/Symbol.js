@@ -2,6 +2,7 @@ export const SYMBOL = {
   emptyString: '',
   comma: ',',
   hyphen: '-',
+  escapeSequence: '\n',
 };
 
 export const MENUS = {
