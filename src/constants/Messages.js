@@ -36,7 +36,7 @@ export const OUTPUT_MESSAGE_FUNCTION = {
     if (title) {
       return `${title}: -${data.toLocaleString('ko-KR')}원`;
     }
-    if (minus) {
+    if (data && minus) {
       return `-${data.toLocaleString('ko-KR')}원`;
     }
 
