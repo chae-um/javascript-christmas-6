@@ -70,3 +70,12 @@ export const DISCOUNT_LIMIT = Object.freeze({
 export const ORDER_LIMIT = Object.freeze({
   maxMenuCount: 20,
 });
+
+export const EVENT_DATE = Object.freeze({
+  days: ['일', '월', '화', '수', '목'],
+  specialDay: [3, 10, 17, 24, 25, 31],
+  year: 2023,
+  month: 12,
+  christmasDDayStart: 1,
+  christmasDDayEnd: 25,
+});

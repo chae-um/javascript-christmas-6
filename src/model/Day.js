@@ -1,3 +1,6 @@
+import { ERROR_MESSAGE } from '../constants/Messages.js';
+import { EVENT_DATE } from '../constants/System.js';
+
 import { handleValidationError } from '../utils/error/index.js';
 import { isInteger, isNan, isNumberValidScope } from '../utils/validators/index.js';
 
@@ -15,13 +18,13 @@ class Day {
   // eslint-disable-next-line
   #validate(date) {
     if (isNan(date)) {
-      return handleValidationError('유효하지 않은 날짜입니다. 다시 입력해 주세요.');
+      return handleValidationError(ERROR_MESSAGE.invalidDate);
     }
     if (!isInteger(date)) {
-      return handleValidationError('유효하지 않은 날짜입니다. 다시 입력해 주세요.');
+      return handleValidationError(ERROR_MESSAGE.invalidDate);
     }
     if (!isNumberValidScope(date)) {
-      return handleValidationError('유효하지 않은 날짜입니다. 다시 입력해 주세요.');
+      return handleValidationError(ERROR_MESSAGE.invalidDate);
     }
   }
 
@@ -30,15 +33,15 @@ class Day {
   }
 
   isChristmasDDayDiscount() {
-    return this.#date >= 1 && this.#date <= 25;
+    return this.#date >= EVENT_DATE.christmasDDayStart && this.#date <= EVENT_DATE.christmasDDayEnd;
   }
 
   getDate() {
     return this.#date;
   }
 
-  isWeekdays(month = 12, year = 2023) {
-    const days = ['일', '월', '화', '수', '목'];
+  isWeekdays(month = EVENT_DATE.month, year = EVENT_DATE.year) {
+    const { days } = EVENT_DATE;
     const specificDate = new Date(year, month - 1, this.#date);
     const dayIndex = specificDate.getDay();
 
@@ -46,7 +49,7 @@ class Day {
   }
 
   isSpecialDiscount() {
-    const specialDay = [3, 10, 17, 24, 25, 31];
+    const { specialDay } = EVENT_DATE;
 
     return specialDay.includes(this.#date);
   }
