@@ -88,7 +88,7 @@ export const EVENT_DATE = Object.freeze({
   dDayEnd: 25,
 });
 
-export const MENUS = {
+export const MENUS = Object.freeze({
   양송이수프: 6000,
   타파스: 5500,
   시저샐러드: 8000,
@@ -101,6 +101,6 @@ export const MENUS = {
   제로콜라: 3000,
   레드와인: 60000,
   샴페인: 25000,
-};
+});
 
-export const BEVERAGE_MENUS = ['제로콜라', '레드와인', '샴페인'];
+export const BEVERAGE_MENUS = Object.freeze(['제로콜라', '레드와인', '샴페인']);
