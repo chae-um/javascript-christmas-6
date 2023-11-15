@@ -1,3 +1,184 @@
+# 🚀 기능 요구사항 반영
+
+보낸 사람: 개발팀 <dev@woowacourse.io>  
+받는 사람: 비즈니스팀 <biz@woowacourse.io>
+
+제목: 12월 이벤트 플래너 개발 완료
+
+안녕하세요 개발팀입니다.
+
+요청해주신 "12월 이벤트 플래너" 개발을 완료하였습니다.
+
+예산확보가 많이 되었으나 인력 충원이 되지 않아 오직 저 혼자 개발하여 미흡한 점이 있지만 요청하신 기능이 정상적으로 동작하도록 최대한 만들어 보았습니다.
+
+먼저 전체적인 시연은 아래와 같습니다.
+
+### 🖥️ 적용된 이벤트가 하나도 없는 경우
+
+![noEvent](https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/2509efd2-e1fb-47ca-ad42-d20e118b732e)
+
+### 🖥️ 적용되는 이벤트가 있는 경우
+
+![event](https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/ce6d149c-7203-4845-989c-63f44363b682)
+
+## 🎯 요청 사항 반영 사항
+
+12월 이벤트 계획 반영사항입니다.
+
+크리스마스 디데이 할인을 제외한 다른 이벤트는 2023.12.1~ 2023.12.31 까지입니다.
+
+- [x] 크리스마스 디데이 할인 (2023.12.1 ~ 2023.12.25)
+- [x] 평일 할인
+- [x] 주말 할인
+- [x] 특별 할인
+- [x] 증정 이벤트
+
+### 1️⃣ 혜택 금액에 따른 12월 이벤트 배지 부여
+
+총혜택 금액에 따라 다른 이벤트 배지를 부여하도록 개발하였습니다.
+
+#### 🥎 5천원 미만 : `없음`
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="296" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/79912410-816e-4334-ae76-78a3c6cf1bc6">
+</details>
+
+#### 🥎 5천원 이상 : `별`
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="353" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/29f5d134-7290-45b5-8613-8f27aafeb7d7">
+</details>
+
+#### 🥎 1만원 이상 : `트리`
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="303" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/d0c426ef-4fa2-410f-9d31-9d537caedce8">
+</details>
+
+#### 🥎 2만원 이상 : `산타`
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="311" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/0d0734b8-7bbd-4532-b75f-b9c9155e992c">
+</details>
+
+### 2️⃣ 고객에게 안내할 이벤트 주의사항은 주문전에 출력되도록 하여 환기할 수 있도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="782" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/9556e891-80f1-4c12-abd8-33c45f670a4a">
+</details>
+
+### 3️⃣ 방문 날짜 관련
+
+#### 🥎 방문할 날짜가 1이상 31이하 숫자가 아닌경우 `[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.` 를 출력하도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="593" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/bd2702d6-61fb-46a8-b4a6-9f22c4cf657e">
+</details>
+
+### 4️⃣ 주문 메뉴 관련
+
+#### 🥎 고객이 메뉴판에 없는 메뉴를 입력하였을 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`라는 에러 메시지를 출력하도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="768" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/01ff47bf-391c-4cbc-9ea5-321725f63c77">
+</details>
+
+#### 🥎 메뉴의 개수가 1미만 20을 초과하는 숫자를 입력하였을 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`라는 에러 메시지를 출력하도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="776" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/940c3f35-6648-4639-bd3e-33cea2a14343">
+</details>
+
+#### 🥎 메뉴 형식이 예시와 다른 경우, `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`라는 에러 메시지를 출력하도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="792" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/e2215725-6065-43ed-afe7-dda684ff1708">
+</details>
+
+#### 🥎 중복 메뉴를 입력한 경우(e.g. 시저샐러드-1,시저샐러드-1), `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`라는 에러 메시지를 출력하도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="788" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/e355e57a-7cd4-4d92-a007-16bb1f371d21">
+</details>
+
+### 5️⃣ 혜택 내역 출력 관련
+
+#### 🥎 주문 메뉴의 출력 순서는 따로 요청하지 않으셔서 입력한 순서대로 출력되게 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="700" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/77af2e4c-2c12-4609-937d-b07d99f9f98a">
+</details>
+
+#### 🥎 `총혜택 금액`은 `할인 금액의 합계` + `증정 메뉴의 가격`으로 설정하였고 `할인 후 예상 결제 금액`은 `할인 전 총주문 금액` - `할인 금액`으로 설정하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="427" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/9b99b439-f730-4f1b-9dee-a9a1b2c708a5">
+</details>
+
+#### 🥎 증정 이벤트에 해당하지 않는 경우, 증정 메뉴 `없음`을 출력하도록 하였습니다.
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="333" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/1ca7e4b3-2f22-40d7-b88a-00e672dd7ec4">
+</details>
+
+#### 🥎 고객에게 혜택 낵역을 보여줄 때 적용된 이벤트 내역만 보여주도록 하였고 만약 적용된 이벤트가 없다면 `없음`으로 보여주도록 하였습니다. (출력 순서는 따로 요청사항이 없으셔서 `디데이 할인`, `평일(주말) 할인`, `특별 할인`, `증정 이벤트` 순입니다.)
+
+<details>
+<summary>예시</summary>
+
+<!-- summary 아래 한칸 공백 두어야함 -->
+<img width="285" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/1677b1dc-e945-4c3f-9aef-063851eae5ec">
+
+<img width="211" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/b6cffab6-d49f-4a46-91e3-346b26019ee4">
+</details>
+
+<br>
+
+추가적인 할인 혜택을 추가 또는 제거하기 유연하도록 구현하여 더 좋은 의견있으면 언제든지 말씀해주세요. 그리고 이벤트 목표중 하나가 12 이벤트 참여 고객 일부가 내년 1월 새해 이벤트에 재참여하는 것이라고 하셨는데 이와 유사한 이벤트라면 몇개의 상수만 교체하면 바로 1월 이벤트에 사용가능하도록 구현하였습니다.
+
+직접 시연해보시고 의견 주시면 감사합니다.
+
+<br>
+
 # 기능 목록
 
 ## 개요
