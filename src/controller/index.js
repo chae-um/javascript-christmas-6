@@ -15,6 +15,8 @@ class ChristmasController {
   }
 
   async run() {
+    this.#printStart();
+
     const order = await this.#receiveOrder();
 
     this.#printBenefitsContent(order);
@@ -38,8 +40,6 @@ class ChristmasController {
   }
 
   async #getDate() {
-    this.#printStart();
-
     const date = await this.#inputView.readDate();
 
     return VisitDate.of(Number(date));
