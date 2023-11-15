@@ -4,8 +4,8 @@ import { DISCOUNT_LIMIT, EVENT_DATE, ORDER_LIMIT } from './System.js';
 
 export const ERROR_MESSAGE = Object.freeze({
   emptyString: '값을 입력해주세요',
-  invalidOrder: '유효하지 않은 주문입니다. 다시 입력해 주세요.',
-  invalidDate: '유효하지 않은 날짜입니다. 다시 입력해 주세요.',
+  invalidOrder: `유효하지 않은 주문입니다. 다시 입력해 주세요.${SYMBOL.escapeSequence}`,
+  invalidDate: `유효하지 않은 날짜입니다. 다시 입력해 주세요.${SYMBOL.escapeSequence}`,
 });
 
 export const INPUT_MESSAGE = Object.freeze({
