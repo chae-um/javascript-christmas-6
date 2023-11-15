@@ -308,3 +308,8 @@ graph TD
 ### 💻 테스트 커버리지
 
 <img width="841" alt="image" src="https://github.com/Ryan-Dia/javascript-lotto-6/assets/76567238/50ae2245-3826-41af-92c2-80d92d507019">
+
+### ⭐️ 개발 하면서 정리했던 내용
+
+- [고려사항 및 이슈](./consider.md)
+- [일부 코드 설명](./codeDocumentation.md)
