@@ -4,8 +4,11 @@ import { OUTPUT_MESSAGE, OUTPUT_MESSAGE_FUNCTION } from '../constants/Messages.j
 import { DISCOUNT } from '../constants/System.js';
 
 const OutputView = {
+  /**
+   * @param {string} message
+   */
   print(message) {
-    return Console.print(message);
+    Console.print(message);
   },
 
   printStart() {
@@ -19,6 +22,9 @@ const OutputView = {
     this.print(OUTPUT_MESSAGE.cautions.menu);
   },
 
+  /**
+   * @param {Map} userRequestedMenus
+   */
   printOrderedMenu(userRequestedMenus) {
     this.print(OUTPUT_MESSAGE.title.userRequestedMenus);
     userRequestedMenus.forEach((quantity, menu) => {
@@ -26,11 +32,17 @@ const OutputView = {
     });
   },
 
+  /**
+   * @param {number} totalMenuPrice
+   */
   printOriginalOrderTotal(totalMenuPrice) {
     this.print(OUTPUT_MESSAGE.title.totalMenuPrice);
     this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(totalMenuPrice, false, false));
   },
 
+  /**
+   * @param {boolean} isGiftMenuAvailable
+   */
   printGiftMenu(isGiftMenuAvailable) {
     this.print(OUTPUT_MESSAGE.title.giftMenu);
 
@@ -41,6 +53,22 @@ const OutputView = {
     }
   },
 
+  /**
+   * Object representing various discounts.
+   * @typedef {object} discountData
+   * @property {boolean} canDiscount
+   * @property {number} dDayDiscount
+   * @property {number} giftDiscount
+   * @property {number} specialDiscount
+   * @property {object} weeklyDiscount
+   * @property {number} weeklyDiscount.amount
+   * @property {string} weeklyDiscount.weekly
+   */
+
+  /**
+   * Example result object with discount information.
+   * @param {discountData} discountData
+   */
   printDiscount(discountData) {
     this.print(OUTPUT_MESSAGE.title.discount);
 
@@ -68,16 +96,25 @@ const OutputView = {
     }
   },
 
+  /**
+   * @param {number} benefitsContent
+   */
   printBenefitsContent(benefitsContent) {
     this.print(OUTPUT_MESSAGE.title.benefitsContent);
     this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(benefitsContent));
   },
 
+  /**
+   * @param {number} discountedTotalMenuPrice
+   */
   printDiscountedTotalMenuPrice(discountedTotalMenuPrice) {
     this.print(OUTPUT_MESSAGE.title.discountedTotalMenuPrice);
     this.print(OUTPUT_MESSAGE_FUNCTION.discountFormat(discountedTotalMenuPrice, false, false));
   },
 
+  /**
+   * @param {string} eventBadge
+   */
   printEventBadge(eventBadge) {
     this.print(OUTPUT_MESSAGE.title.eventBadge);
     this.print(eventBadge);
