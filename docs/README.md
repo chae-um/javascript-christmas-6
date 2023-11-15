@@ -313,3 +313,54 @@ graph TD
 
 - [고려사항 및 이슈](./consider.md)
 - [일부 코드 설명](./codeDocumentation.md)
+
+### 🗂️ 디렉토리 구조
+
+```text
+📦src
+ ┣ 📂constants
+ ┃ ┣ 📜Messages.js
+ ┃ ┣ 📜Symbol.js
+ ┃ ┗ 📜System.js
+ ┣ 📂controller
+ ┃ ┗ 📜index.js
+ ┣ 📂model
+ ┃ ┣ 📜Discount.js
+ ┃ ┣ 📜UserRequestedMenus.js
+ ┃ ┣ 📜VisitDate.js
+ ┃ ┗ 📜index.js
+ ┣ 📂utils
+ ┃ ┣ 📂error
+ ┃ ┃ ┣ 📜CustomTypeError.js
+ ┃ ┃ ┣ 📜DefaultError.js
+ ┃ ┃ ┣ 📜ValidationError.js
+ ┃ ┃ ┗ 📜index.js
+ ┃ ┣ 📂validators
+ ┃ ┃ ┣ 📂src
+ ┃ ┃ ┃ ┣ 📂is-empty-string
+ ┃ ┃ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┃ ┃ ┗ 📜index.test.js
+ ┃ ┃ ┃ ┣ 📂is-integer
+ ┃ ┃ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┃ ┃ ┗ 📜index.test.js
+ ┃ ┃ ┃ ┣ 📂is-nan
+ ┃ ┃ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┃ ┃ ┗ 📜index.test.js
+ ┃ ┃ ┃ ┣ 📂is-number-valid-scope
+ ┃ ┃ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┃ ┃ ┗ 📜index.test.js
+ ┃ ┃ ┃ ┣ 📂is-valid-count
+ ┃ ┃ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┃ ┃ ┗ 📜index.test.js
+ ┃ ┃ ┃ ┗ 📂is-valid-formatter
+ ┃ ┃ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┃ ┃ ┗ 📜index.test.js
+ ┃ ┃ ┗ 📜index.js
+ ┃ ┣ 📜deepFreeze.js
+ ┃ ┗ 📜split.js
+ ┣ 📂view
+ ┃ ┣ 📜InputView.js
+ ┃ ┗ 📜OutputView.js
+ ┣ 📜App.js
+ ┗ 📜index.js
+```
