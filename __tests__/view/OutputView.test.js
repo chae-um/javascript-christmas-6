@@ -42,11 +42,39 @@ describe('OutputView', () => {
       // when
       OutputView.printCautions();
 
+      // then
       const expected = [
         '[이벤트 주의 사항]',
         '총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.',
         '음료만 주문 시, 주문할 수 없습니다.',
         '메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.',
+      ];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+  });
+
+  describe('printOrderedMenu', () => {
+    test('고객이 주문한 메뉴를 알맞은 포맷에 맞게 출력해야한다.', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = [
+        ['티본스테이크', 2],
+        ['크리스마스파스타', 3],
+        ['제로콜라', 5],
+        ['아이스크림', 1],
+      ];
+      const userRequestedMenus = new Map(input);
+
+      // when
+      OutputView.printOrderedMenu(userRequestedMenus);
+
+      // then
+      const expected = [
+        '티본스테이크 2개',
+        '크리스마스파스타 3개',
+        '제로콜라 5개',
+        '아이스크림 1개',
       ];
 
       expectLogContains(getOutput(logSpy), expected);
