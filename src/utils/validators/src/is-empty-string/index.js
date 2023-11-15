@@ -1,4 +1,4 @@
-import { SYMBOL } from '../../../../constants/Symbol.js';
+import SYMBOL from '../../../../constants/Symbol.js';
 
 /**
  * @param {string} input

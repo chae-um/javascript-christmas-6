@@ -1,4 +1,4 @@
-import { SYMBOL } from './Symbol.js';
+import SYMBOL from './Symbol.js';
 import { DISCOUNT_LIMIT, EVENT_DATE, ORDER_LIMIT } from './System.js';
 
 export const ERROR_MESSAGE = {

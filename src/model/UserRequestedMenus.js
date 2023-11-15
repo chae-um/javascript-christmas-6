@@ -1,6 +1,12 @@
 import { ERROR_MESSAGE } from '../constants/Messages.js';
-import { BEVERAGE_MENUS, MENUS, SYMBOL } from '../constants/Symbol.js';
-import { DISCOUNT_LIMIT, MENU_BY_CATEGORY, ORDER_LIMIT } from '../constants/System.js';
+import SYMBOL from '../constants/Symbol.js';
+import {
+  BEVERAGE_MENUS,
+  MENUS,
+  DISCOUNT_LIMIT,
+  MENU_BY_CATEGORY,
+  ORDER_LIMIT,
+} from '../constants/System.js';
 
 import { handleValidationError } from '../utils/error/index.js';
 import split from '../utils/split.js';
