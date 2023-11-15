@@ -81,6 +81,52 @@ describe('OutputView', () => {
     });
   });
 
+  describe('printOriginalOrderTotal', () => {
+    test('할인 전 총주문 금액을 포맷에 맞게 출력해야한다. ', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = 112_000;
+
+      // when
+      OutputView.printOriginalOrderTotal(input);
+
+      // then
+      const expected = ['112,000원'];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+  });
+
+  describe('printGiftMenu', () => {
+    test('증정 이벤트에 해당되면 "<증정 메뉴>"와 "삼페인 1개"를 출력해야한다.', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = true;
+
+      // when
+      OutputView.printGiftMenu(input);
+
+      // then
+      const expected = ['<증정 메뉴>', '샴페인 1개'];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+
+    test('증정 이벤트에 해당되지 않으면 "<증정 메뉴>"와 "없음"을 출력해야 한다.', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = false;
+
+      // when
+      OutputView.printGiftMenu(input);
+
+      // then
+      const expected = ['<증정 메뉴>', '없음'];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+  });
+
   describe('printDiscountData', () => {
     test.each([
       {
@@ -131,6 +177,68 @@ describe('OutputView', () => {
       OutputView.printDiscountData(input);
 
       // then
+      expectLogContains(getOutput(logSpy), expected);
+    });
+  });
+
+  describe('printBenefitsContent', () => {
+    test('총혜택 금액이 존재하면 "-" 부호를 붙여서 출력해야 한다.', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = 33_000;
+
+      // when
+      OutputView.printBenefitsContent(input);
+
+      // then
+      const expected = ['<총혜택 금액>', '-33,000원'];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+
+    test('총혜택 금액이 존재하지 않으면  "-" 부호 없이 "0원"을 출력해야 한다.', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = 0;
+
+      // when
+      OutputView.printBenefitsContent(input);
+
+      // then
+      const expected = ['<총혜택 금액>', '0원'];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+  });
+
+  describe('printDiscountedTotalMenuPrice', () => {
+    test('할인 후 예상 결제금액이 알맞은 포맷(1300 이라면  1,300원)으로 출력해야한다.', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = 134_754;
+
+      // when
+      OutputView.printDiscountedTotalMenuPrice(input);
+
+      // then
+      const expected = ['<할인 후 예상 결제 금액>', '134,754원'];
+
+      expectLogContains(getOutput(logSpy), expected);
+    });
+  });
+
+  describe('printEventBadge', () => {
+    test('이벤트 배지를 출력해야한다. ', () => {
+      // given
+      const logSpy = getLogSpy();
+      const input = '산타';
+
+      // when
+      OutputView.printEventBadge(input);
+
+      // then
+      const expected = ['<12월 이벤트 배지>', '산타'];
+
       expectLogContains(getOutput(logSpy), expected);
     });
   });
