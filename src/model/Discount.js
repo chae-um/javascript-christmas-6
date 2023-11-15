@@ -17,7 +17,7 @@ class Discount {
   calculateDiscount() {
     const weeklyDiscount = this.#calculateWeeklyDiscount();
     const specialDiscount = this.#calculateSpecialDisCount();
-    const dDayDiscount = this.#calculateChristmasDDayDiscount();
+    const dDayDiscount = this.#calculateDDayDiscount();
     const giftDiscount = this.#calculateGiftMenuDiscount();
 
     return { weeklyDiscount, specialDiscount, dDayDiscount, giftDiscount };
@@ -69,7 +69,7 @@ class Discount {
     return DISCOUNT.nothing;
   }
 
-  #calculateChristmasDDayDiscount() {
+  #calculateDDayDiscount() {
     if (this.#visitDate.isChristmasDDayDiscount()) {
       return DISCOUNT.dDay.default + (this.#visitDate.getDate() - 1) * DISCOUNT.dDay.unitAmount;
     }

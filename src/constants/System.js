@@ -84,6 +84,6 @@ export const EVENT_DATE = Object.freeze({
   specialDay: [3, 10, 17, 24, 25, 31],
   year: 2023,
   month: 12,
-  christmasDDayStart: 1,
-  christmasDDayEnd: 25,
+  dDayStart: 1,
+  dDayEnd: 25,
 });

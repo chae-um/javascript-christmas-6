@@ -50,7 +50,7 @@ class VisitDate {
    * @returns {boolean}
    */
   isChristmasDDayDiscount() {
-    return this.#date >= EVENT_DATE.christmasDDayStart && this.#date <= EVENT_DATE.christmasDDayEnd;
+    return this.#date >= EVENT_DATE.dDayStart && this.#date <= EVENT_DATE.dDayEnd;
   }
 
   /**
