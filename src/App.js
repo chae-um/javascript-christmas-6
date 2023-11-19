@@ -1,5 +1,13 @@
-class App {
-  async run() {}
-}
+import EventController from './controller/EventController.js';
 
-export default App;
+export default class App {
+  #eventController;
+
+  constructor() {
+    this.#eventController = new EventController();
+  }
+
+  async run() {
+    await this.#eventController.start();
+  }
+}
